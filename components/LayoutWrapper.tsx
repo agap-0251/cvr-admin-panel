@@ -2,7 +2,7 @@
 
 import { NavbarProvider } from "@/context/navbarContext"
 
-const LayoutWrapper = ({children}) => {
+const LayoutWrapper = ({children} : any) => {
   return (
     <NavbarProvider>
         {children}

@@ -11,10 +11,10 @@ export const metadata = {
   description: 'This is a admin panel for managing the mentors and student details of cvr college of engineering.',
 }
 
-export default function RootLayout({ children }) {
+export default function RootLayout({ children } : any) {
   return (
     <html lang="en">
-      <body className={`${inter.className} bg-black min-h-screen text-white overflow-y-hidden`}>
+      <body className=" bg-black min-h-screen text-white overflow-hidden">
         <LayoutWrapper>
           {children}
         </LayoutWrapper>
