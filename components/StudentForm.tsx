@@ -59,35 +59,11 @@ const FormSchema = z.object({
 
 export default function TempForm({isDisabled} : {isDisabled : boolean}) {
 
-  const preloadedValues = {
-  name : "hello",
-  rollno : "hello",
-  rank: 222,
-  fathername: "hello",
-  mothername: "hello",
-  aadharno: "hello",
-  dob: "2023/08/11",
-  gender: "male",
-  medium: "English",
-  intermarks: 222,
-  sscmarks: 222,
-  fatherno: 9988776655,
-  motherno: 9988776655,
-  stdno: 9988776655,
-  caste: "OC",
-  religion: "hello",
-  stdAdim: z.enum(["Conveyer", "Management"]),
-  pressadd: "hello",
-  permadd: "hello",
-  stdmail: "hello@gmail.com",
-  fathermail: "hello@gmail.com",
-  mothermail: "hello@gmail.com",
-  }
+  
 
   const form = useForm<z.infer<typeof FormSchema>>(
     {
-    resolver: zodResolver(FormSchema),
-    defaultValues : preloadedValues
+    resolver: zodResolver(FormSchema)
   }
   )
 
