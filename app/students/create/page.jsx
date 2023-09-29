@@ -2,9 +2,14 @@ import StudentForm from "@/components/StudentForm"
 
 
 const StudentCreate = () => {
+
+  const preloadValues = {
+
+  }
+
   return (
     <>
-    <StudentForm isDisabled = {false} />
+    <StudentForm isDisabled = {false} preloadValues={preloadValues} />
     </>
   )
 }
