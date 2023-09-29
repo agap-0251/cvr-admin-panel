@@ -1,202 +1,7 @@
-"use client"
+"use client";
 
-import { zodResolver } from "@hookform/resolvers/zod"
-import { FieldValues, useForm } from "react-hook-form"
-import * as z from "zod"
-
-import { Button } from "@/components/ui/button"
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import { toast } from "@/components/ui/use-toast"
-import { Input } from "./ui/input"
-import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover"
-import {  CalendarIcon } from "lucide-react"
-import { cn } from "@/lib/utils"
-import { Calendar } from "@/components/ui/calendar"
-import { format } from "date-fns"
-import MainContainer from "./MainContainer"
-
-const FormSchema = z.object({
-  name : z.string(),
-  rollno : z.string(),
-  rank: z.coerce.number().nonnegative(),
-  fathername: z.string(),
-  mothername: z.string(),
-  aadharno: z.string(),
-  dob: z.string(),
-  gender: z.enum(["male", "female", "other"]),
-  medium: z.enum(["English", "Hindi", "Telugu", "Other"]),
-  intermarks: z.coerce.number().gte(0),
-  sscmarks: z.coerce.number().gte(0),
-  fatherno: z.coerce.number().max(9999999999).min(1000000000),
-  motherno: z.coerce.number().max(9999999999).min(1000000000),
-  stdno: z.coerce.number().max(9999999999).min(1000000000),
-  caste: z.enum(["OC", "SC", "ST", "BC", "BCA", "OTHER"]),
-  religion: z.string(),
-  stdAdim: z.enum(["Conveyer", "Management"]),
-  pressadd: z.string().nonempty(),
-  permadd: z.string().nonempty(),
-  stdmail: z.string().email(),
-  fathermail: z.string().email(),
-  mothermail: z.string().email(),
-})
-
-
-export default function TempForm({isDisabled} : {isDisabled : boolean}) {
-
-  
-
-  const form = useForm<z.infer<typeof FormSchema>>(
-    {
-    resolver: zodResolver(FormSchema)
-  }
-  )
-
-  async function onSubmit(data:  z.infer<typeof FormSchema>) {
-    console.log(data)
-    // FormSchema.parse(data)
-    const res = await fetch(`https://mentor-student-umum.onrender.com/students/`,{
-        method : 'POST',
-        body : JSON.stringify(data),
-        headers : {
-            'Content-Type' : 'application/json'
-        }
-    })
-    // const response = await res.json()
-    console.log( res)
-    
-}
-
-  return (
-    <MainContainer>
-        <div className="w-[40rem] max-h-fit px-4 flex flex-col items-center my-[4rem] ">
-
-        <Form  {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="w-2/3 space-y-6">
-        
-        {/* rollno  */}
-        <FormField
-            control={form.control}
-            name="rollno"
-            render={({ field }) => (
-                <FormItem>
-                <FormLabel>Roll number</FormLabel>
-                <FormControl>
-                    <Input placeholder="Roll number"  {...field}/>
-                </FormControl>
-                <FormDescription>
-                    This is your public display name.
-                </FormDescription>
-                <FormMessage />
-                </FormItem>
-            )}
-            />
-        
-        {/*Names */}
-        <FormField
-            control={form.control}
-            name="name"
-            render={({ field }) => (
-                <FormItem>
-                <FormLabel>Username</FormLabel>
-                <FormControl>
-                    <Input placeholder="shadcn" {...field} />
-                </FormControl>
-                <FormDescription>
-                    This is your public display name.
-                </FormDescription>
-                <FormMessage />
-                </FormItem>
-            )}
-            />
-
-    <FormField
-            control={form.control}
-            name="fathername"
-            render={({ field }) => (
-                <FormItem>
-                <FormLabel>Father name</FormLabel>
-                <FormControl>
-                    <Input placeholder="Father name" {...field} />
-                </FormControl>
-                <FormDescription>
-                    This is your public display name.
-                </FormDescription>
-                <FormMessage />
-                </FormItem>
-            )}
-            />
-        
-        <FormField
-            control={form.control}
-            name="mothername"
-            render={({ field }) => (
-                <FormItem>
-                <FormLabel>Mother name</FormLabel>
-                <FormControl>
-                    <Input placeholder="Mother name" {...field} />
-                </FormControl>
-                <FormDescription>
-                    This is your public display name.
-                </FormDescription>
-                <FormMessage />
-                </FormItem>
-            )}
-            />
-
-                {/* aadhar,dob,gender,medium  */}
-    <FormField
-            control={form.control}
-            name="aadharno"
-            render={({ field }) => (
-                <FormItem>
-                <FormLabel>Aadhar number</FormLabel>
-                <FormControl>
-                    <Input placeholder="Aadhar number" {...field} />
-                </FormControl>
-                <FormDescription>
-                    This is your public display name.
-                </FormDescription>
-                <FormMessage />
-                </FormItem>
-            )}
-            />
-
-    {/* dob  */}
-
-    <FormField
-            control={form.control}
-            name="dob"
-            render={({ field }) => (
-                <FormItem>
-                <FormLabel>Date of birth</FormLabel>
-                <FormControl>
-                    <Input placeholder="Date of birth" {...field} />
-                </FormControl>
-                <FormDescription>
-                    This is your public display name.
-                </FormDescription>
-                <FormMessage />
-                </FormItem>
-            )}
-            />
-
-    {/* <FormField
+{
+  /* <FormField
             control={form.control}
             name="dob"
             render={({ field }) => (
@@ -238,339 +43,560 @@ export default function TempForm({isDisabled} : {isDisabled : boolean}) {
                 </FormDescription>
                 <FormMessage />
                 </FormItem>
-            )} */}
-            {/* /> */}
+            )} 
+            /> */
+}
+
+import { zodResolver } from "@hookform/resolvers/zod";
+import { FieldValues, useForm } from "react-hook-form";
+import * as z from "zod";
+
+import { Button } from "@/components/ui/button";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import MainContainer from "./MainContainer";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Input } from "./ui/input";
+// import { toast } from "@/components/ui/use-toast"
+// import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover"
+// import {  CalendarIcon } from "lucide-react"
+// import { cn } from "@/lib/utils"
+// import { Calendar } from "@/components/ui/calendar"
+// import { format } from "date-fns"
+
+const FormSchema = z.object({
+  name: z.string().toUpperCase(),
+  rollno: z.string().toUpperCase(),
+  rank: z.coerce.number().nonnegative().default(0).optional(),
+  fathername: z.string().toUpperCase(),
+  mothername: z.string().toUpperCase(),
+  aadharno: z.string().toUpperCase(),
+  dob: z.string().toUpperCase(),
+  gender: z.enum(["MALE", "FEMALE", "OTHER"]),
+  medium: z.enum(["ENGLISH", "HINDI", "TELUGU", "OTHER"]),
+  intermarks: z.coerce.number().gte(0),
+  sscmarks: z.coerce.number().gte(0),
+  fatherno: z.coerce.number().max(9999999999).min(1000000000).optional(),
+  motherno: z.coerce.number().max(9999999999).min(1000000000).optional(),
+  stdno: z.coerce.number().max(9999999999).min(1000000000),
+  caste: z.enum(["OC", "SC", "ST", "BC", "BC_A","BC_B","BC_C","BC_D","BC_E", "OTHER"]),
+  religion: z.string().toUpperCase(),
+  stdAdim: z.enum(["CONVENER", "MANAGEMENT","CON","MGT.","SPOT"]),
+  pressadd: z.string().toUpperCase().nonempty().optional(),
+  permadd: z.string().toUpperCase().nonempty().optional(),
+  stdmail: z.string().toUpperCase().email().optional(),
+  fathermail: z.string().toUpperCase().email().optional(),
+  mothermail: z.string().toUpperCase().email().optional(),
+});
+
+type PRELOAD = z.infer<typeof FormSchema>
+
+export default function StudentForm({ isDisabled,preloadValues }: { isDisabled: boolean,preloadValues : PRELOAD}) {
+ 
+  const form = useForm<z.infer<typeof FormSchema>>({
+    resolver: zodResolver(FormSchema),
+    defaultValues : FormSchema.parse(preloadValues)
+  });
+
+  async function onSubmit(data: z.infer<typeof FormSchema>) {
+    // console.log(data);
+    // FormSchema.parse(data)
+
+    if(!isDisabled) {
+      console.log("Inside")
+      const res = await fetch(
+        `https://mentor-student-umum.onrender.com/students/${data.rollno}`,
+        {
+          method: "PATCH",
+          body: JSON.stringify(data),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+        
+      );
+      const response = await res.json();
+      // console.log(response);
+      return ;
+    }
+
+    const res = await fetch(
+      `https://mentor-student-umum.onrender.com/students/`,
+      {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const response = await res.json();
+    // console.log(response);
+  }
+
+  return (
+    <MainContainer>
+      <div className="w-[40rem] max-h-fit px-4 flex flex-col items-center my-[4rem] ">
+        <Form {...form}>
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="w-2/3 space-y-6"
+          >
+            {/* rollno  */}
+            <FormField
+              disabled = {isDisabled}
+              control={form.control}
+              name="rollno"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Roll number</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Roll number" {...field} />
+                  </FormControl>
+                  <FormDescription>
+                    This is your Rollnumber (eg : 21b81a05z9)
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            {/*Names */}
+            <FormField
+              disabled = {isDisabled}
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Student Name</FormLabel>
+                  <FormControl>
+                    <Input placeholder="shadcn" {...field} />
+                  </FormControl>
+                  <FormDescription>This is the Student name.</FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              disabled = {isDisabled}
+              control={form.control}
+              name="fathername"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Father name</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Father name" {...field} />
+                  </FormControl>
+                  <FormDescription>
+                    This is Student's Father name.
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              disabled = {isDisabled}
+              control={form.control}
+              name="mothername"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Mother name</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Mother name" {...field} />
+                  </FormControl>
+                  <FormDescription>
+                    This is Student's Mother name.
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            {/* aadhar,dob,gender,medium  */}
+            <FormField
+              disabled = {isDisabled}
+              control={form.control}
+              name="aadharno"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Aadhar number</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Aadhar number" {...field} />
+                  </FormControl>
+                  <FormDescription>Aadhar card of student.</FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            {/* dob  */}
+
+            <FormField
+              disabled = {isDisabled}
+              control={form.control}
+              name="dob"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Date of birth</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Date of birth" {...field} />
+                  </FormControl>
+                  <FormDescription>
+                    Date of birth(FORMAT - DD/MM/YYYY)
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
             {/* gender  */}
 
             <FormField
-            control={form.control}
-            name="gender"
-            render={({ field }) => (
+              disabled = {isDisabled}
+              control={form.control}
+              name="gender"
+              render={({ field }) => (
                 <FormItem className="space-y-3">
-                <FormLabel>Gender</FormLabel>
-                <FormControl>
+                  <FormLabel>Gender</FormLabel>
+                  <FormControl>
                     <RadioGroup
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                    className="flex flex-col space-y-1"
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                      className="flex flex-col space-y-1"
                     >
-                    <FormItem className="flex items-center space-x-3 space-y-0">
+                      <FormItem className="flex items-center space-x-3 space-y-0">
                         <FormControl>
-                        <RadioGroupItem value="male" />
+                          <RadioGroupItem value="MALE" />
                         </FormControl>
-                        <FormLabel className="font-normal">
-                        Male
-                        </FormLabel>
-                    </FormItem>
-                    <FormItem className="flex items-center space-x-3 space-y-0">
+                        <FormLabel className="font-normal">Male</FormLabel>
+                      </FormItem>
+                      <FormItem className="flex items-center space-x-3 space-y-0">
                         <FormControl>
-                        <RadioGroupItem value="female" />
+                          <RadioGroupItem value="FEMALE" />
                         </FormControl>
-                        <FormLabel className="font-normal">
-                        Female
-                        </FormLabel>
-                    </FormItem>
-                    <FormItem className="flex items-center space-x-3 space-y-0">
+                        <FormLabel className="font-normal">Female</FormLabel>
+                      </FormItem>
+                      <FormItem className="flex items-center space-x-3 space-y-0">
                         <FormControl>
-                        <RadioGroupItem value="other" />
+                          <RadioGroupItem value="other" />
                         </FormControl>
                         <FormLabel className="font-normal">Other</FormLabel>
-                    </FormItem>
+                      </FormItem>
                     </RadioGroup>
-                </FormControl>
-                <FormMessage />
+                  </FormControl>
+                  <FormMessage />
                 </FormItem>
-            )}
+              )}
             />
 
             {/* medium  */}
 
-    <FormField
-            control={form.control}
-            name="medium"
-            render={({ field }) => (
-                <FormItem>
-                <FormLabel>Medium</FormLabel>
-                <FormControl>
-                    <Input placeholder="Medium" {...field} />
-                </FormControl>
-                <FormDescription>
-                    This is your public display name.
-                </FormDescription>
-                <FormMessage />
-                </FormItem>
-            )}
-            />
-
-    <FormField
-            control={form.control}
-            name="intermarks"
-            render={({ field }) => (
-                <FormItem>
-                <FormLabel>Inter marks</FormLabel>
-                <FormControl>
-                    <Input placeholder="Inter marks" {...field} />
-                </FormControl>
-                <FormDescription>
-                    This is your public display name.
-                </FormDescription>
-                <FormMessage />
-                </FormItem>
-            )}
-            />
-
-<FormField
-            control={form.control}
-            name="sscmarks"
-            render={({ field }) => (
-                <FormItem>
-                <FormLabel>SSC marks</FormLabel>
-                <FormControl>
-                    <Input placeholder="SSC marks" {...field} />
-                </FormControl>
-                <FormDescription>
-                    This is your public display name.
-                </FormDescription>
-                <FormMessage />
-                </FormItem>
-            )}
-            />
-    <FormField
-            control={form.control}
-            name="rank"
-            render={({ field }) => (
-                <FormItem>
-                <FormLabel>Rank</FormLabel>
-                <FormControl>
-                    <Input placeholder="Rank" {...field} />
-                </FormControl>
-                <FormDescription>
-                    This is your public display name.
-                </FormDescription>
-                <FormMessage />
-                </FormItem>
-            )}
-            />
-
-        {/* numbers  */}
-        <FormField
-            control={form.control}
-            name="stdno"
-            render={({ field }) => (
-                <FormItem>
-                <FormLabel>Student mobile no</FormLabel>
-                <FormControl>
-                    <Input placeholder="Student mobile no" {...field} />
-                </FormControl>
-                <FormDescription>
-                    This is your public display name.
-                </FormDescription>
-                <FormMessage />
-                </FormItem>
-            )}
-            />
-        
-        <FormField
-            control={form.control}
-            name="fatherno"
-            render={({ field }) => (
-                <FormItem>
-                <FormLabel>Father mobile no</FormLabel>
-                <FormControl>
-                    <Input placeholder="Father mobile no" {...field} />
-                </FormControl>
-                <FormDescription>
-                    This is your public display name.
-                </FormDescription>
-                <FormMessage />
-                </FormItem>
-            )}
-            />
-        
-        <FormField
-            control={form.control}
-            name="motherno"
-            render={({ field }) => (
-                <FormItem>
-                <FormLabel>Mother mobile no</FormLabel>
-                <FormControl>
-                    <Input placeholder="Mother mobile no" {...field} />
-                </FormControl>
-                <FormDescription>
-                    This is your public display name.
-                </FormDescription>
-                <FormMessage />
-                </FormItem>
-            )}
-            />
-        
-
-        {/* mails  */}
-
-        <FormField
-            control={form.control}
-            name="stdmail"
-            render={({ field }) => (
-                <FormItem>
-                <FormLabel>Username</FormLabel>
-                <FormControl>
-                    <Input type="email" placeholder="Student mail" {...field} />
-                </FormControl>
-                <FormDescription>
-                    This is your public display name.
-                </FormDescription>
-                <FormMessage />
-                </FormItem>
-            )}
-            />
-
-    <FormField
-            control={form.control}
-            name="fathermail"
-            render={({ field }) => (
-                <FormItem>
-                <FormLabel>Username</FormLabel>
-                <FormControl>
-                    <Input type="email" placeholder="Father mail" {...field} />
-                </FormControl>
-                <FormDescription>
-                    This is your public display name.
-                </FormDescription>
-                <FormMessage />
-                </FormItem>
-            )}
-            />
-
-        <FormField
-            control={form.control}
-            name="mothermail"
-            render={({ field }) => (
-                <FormItem>
-                <FormLabel>Username</FormLabel>
-                <FormControl>
-                    <Input type="email" placeholder="Mother mail" {...field} />
-                </FormControl>
-                <FormDescription>
-                    This is your public display name.
-                </FormDescription>
-                <FormMessage />
-                </FormItem>
-            )}
-            />
-            
-            {/* admission and caste  */}
-            
             <FormField
-            control={form.control}
-            name="stdAdim"
-            render={({ field }) => (
+              disabled = {isDisabled}
+              control={form.control}
+              name="medium"
+              render={({ field }) => (
                 <FormItem>
-                <FormLabel>Admission </FormLabel>
-                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <FormLabel>Medium</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Medium" {...field} />
+                  </FormControl>
+                  <FormDescription>Medium of study.</FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              disabled = {isDisabled}
+              control={form.control}
+              name="intermarks"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Inter marks</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Inter marks" {...field} />
+                  </FormControl>
+                  <FormDescription>Inter marks of Student.</FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              disabled = {isDisabled}
+              control={form.control}
+              name="sscmarks"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>SSC marks</FormLabel>
+                  <FormControl>
+                    <Input placeholder="SSC marks" {...field} />
+                  </FormControl>
+                  <FormDescription>SSC marks of Student.</FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              disabled = {isDisabled}
+              control={form.control}
+              name="rank"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Rank</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Rank" {...field} />
+                  </FormControl>
+                  <FormDescription>Student's Eamcet Rank.</FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            {/* numbers  */}
+            <FormField
+              disabled = {isDisabled}
+              control={form.control}
+              name="stdno"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Student mobile no</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Student mobile no" {...field} />
+                  </FormControl>
+                  <FormDescription>Student's Mobile number.</FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              disabled = {isDisabled}
+              control={form.control}
+              name="fatherno"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Father mobile no</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Father mobile no" {...field} />
+                  </FormControl>
+                  <FormDescription>Father's Mobile number.</FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              disabled = {isDisabled}
+              control={form.control}
+              name="motherno"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Mother mobile no</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Mother mobile no" {...field} />
+                  </FormControl>
+                  <FormDescription>Mother's Mobile number.</FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            {/* mails  */}
+
+            <FormField
+              disabled = {isDisabled}
+              control={form.control}
+              name="stdmail"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Student's Mail</FormLabel>
+                  <FormControl>
+                    <Input type="email" placeholder="Student mail" {...field} />
+                  </FormControl>
+                  <FormDescription>Student's Personal mail</FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              disabled = {isDisabled}
+              control={form.control}
+              name="fathermail"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Father's mail</FormLabel>
+                  <FormControl>
+                    <Input type="email" placeholder="Father mail" {...field} />
+                  </FormControl>
+                  <FormDescription>Father's Personal mail</FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              disabled = {isDisabled}
+              control={form.control}
+              name="mothermail"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Mother's email</FormLabel>
+                  <FormControl>
+                    <Input type="email" placeholder="Mother mail" {...field} />
+                  </FormControl>
+                  <FormDescription>Mother's Personal mail</FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            {/* admission and caste  */}
+
+            <FormField
+              disabled = {isDisabled}
+              control={form.control}
+              name="stdAdim"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Admission </FormLabel>
+                  <Select
+                  disabled = {isDisabled}
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
                     <FormControl>
-                    <SelectTrigger className="bg-black">
+                      <SelectTrigger className="bg-black">
                         <SelectValue placeholder="Select Admission type" />
-                    </SelectTrigger>
+                      </SelectTrigger>
                     </FormControl>
                     <SelectContent className="text-white bg-black">
-                    <SelectItem value="Conveyer">Conveyer</SelectItem>
-                    <SelectItem value="Management">Management</SelectItem>
+                      <SelectItem value="CONVENER">CONVENER</SelectItem>
+                      <SelectItem value="CON">CON</SelectItem>
+                      <SelectItem value="MANAGEMENT">MANAGEMENT</SelectItem>
+                      <SelectItem value="MGT.">MGT.</SelectItem>
+                      <SelectItem value="SPOT">SPOT</SelectItem>
                     </SelectContent>
-                </Select>
-                <FormDescription>
-                    You can manage email addresses in your{" "}
-                </FormDescription>
-                <FormMessage />
+                  </Select>
+                  <FormDescription>
+                    Admission type ("CONVENER" or "MANAGEMENT" or "SPOT")
+                  </FormDescription>
+                  <FormMessage />
                 </FormItem>
-            )}
+              )}
             />
 
-    <FormField
-            control={form.control}
-            name="caste"
-            render={({ field }) => (
+            <FormField
+            
+              control={form.control}
+              name="caste"
+              render={({ field }) => (
                 <FormItem>
-                <FormLabel>Caste </FormLabel>
-                <Select  onValueChange={field.onChange} defaultValue={field.value}>
-                    <FormControl >
-                    <SelectTrigger className="bg-black">
-                        <SelectValue  placeholder="Select your caste" />
-                    </SelectTrigger>
+                  
+                  <FormLabel>Caste </FormLabel>
+                  <Select
+                  disabled = {isDisabled}
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger className="bg-black">
+                        <SelectValue placeholder="Select your caste" />
+                      </SelectTrigger>
                     </FormControl>
                     <SelectContent className="bg-black text-white">
-                    <SelectItem value="OC">OC</SelectItem>
-                    <SelectItem value="SC">SC</SelectItem>
-                    <SelectItem value="ST">ST</SelectItem>
-                    <SelectItem value="BC">BC</SelectItem>
-                    <SelectItem value="BCA">BCA</SelectItem>
-                    <SelectItem value="OTHER">OTHER</SelectItem>
+                      <SelectItem value="OC">OC</SelectItem>
+                      <SelectItem value="SC">SC</SelectItem>
+                      <SelectItem value="ST">ST</SelectItem>
+                      <SelectItem value="BC">BC</SelectItem>
+                      <SelectItem value="BC_A">BC_A</SelectItem>
+                      <SelectItem value="BC_B">BC_B</SelectItem>
+                      <SelectItem value="BC_C">BC_C</SelectItem>
+                      <SelectItem value="BC_D">BC_D</SelectItem>
+                      <SelectItem value="BC_E">BC_E</SelectItem>
+                      <SelectItem value="OTHER">OTHER</SelectItem>
                     </SelectContent>
-                </Select>
-                <FormDescription>
-                    You can manage email addresses in your{" "}
-                </FormDescription>
-                <FormMessage />
+                  </Select>
+                  <FormDescription>Student's Caste</FormDescription>
+                  <FormMessage />
                 </FormItem>
-            )}
+              )}
             />
 
-    <FormField
-            control={form.control}
-            name="religion"
-            render={({ field }) => (
+            <FormField
+              disabled = {isDisabled}
+              control={form.control}
+              name="religion"
+              render={({ field }) => (
                 <FormItem>
-                <FormLabel>Religion</FormLabel>
-                <FormControl>
-                    <Input  placeholder="Religion" {...field} />
-                </FormControl>
-                <FormDescription>
-                    This is your public display name.
-                </FormDescription>
-                <FormMessage />
+                  <FormLabel>Religion</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Religion" {...field} />
+                  </FormControl>
+                  <FormDescription>Religion of student</FormDescription>
+                  <FormMessage />
                 </FormItem>
-            )}
+              )}
             />
 
-    <FormField
-            control={form.control}
-            name="pressadd"
-            render={({ field }) => (
+            <FormField
+              disabled = {isDisabled}
+              control={form.control}
+              name="pressadd"
+              render={({ field }) => (
                 <FormItem>
-                <FormLabel>Present Address</FormLabel>
-                <FormControl>
+                  <FormLabel>Present Address</FormLabel>
+                  <FormControl>
                     <Input placeholder="Present Address" {...field} />
-                </FormControl>
-                <FormDescription>
-                    This is your public display name.
-                </FormDescription>
-                <FormMessage />
+                  </FormControl>
+                  <FormDescription>Present address of student</FormDescription>
+                  <FormMessage />
                 </FormItem>
-            )}
+              )}
             />
-    
-    <FormField
-            control={form.control}
-            name="permadd"
-            render={({ field }) => (
+
+            <FormField
+              disabled = {isDisabled}
+              control={form.control}
+              name="permadd"
+              render={({ field }) => (
                 <FormItem>
-                <FormLabel>Permanent Address</FormLabel>
-                <FormControl>
+                  <FormLabel>Permanent Address</FormLabel>
+                  <FormControl>
                     <Input placeholder="Permanent Address" {...field} />
-                </FormControl>
-                <FormDescription>
-                    This is your public display name.
-                </FormDescription>
-                <FormMessage />
+                  </FormControl>
+                  <FormDescription>
+                    Permanent address of student
+                  </FormDescription>
+                  <FormMessage />
                 </FormItem>
-            )}
+              )}
             />
 
-
-            <Button disabled = {isDisabled} type="submit">Submit</Button>
-        </form>
+            <Button disabled={isDisabled} type="submit">
+              Submit
+            </Button>
+          </form>
         </Form>
-        </div>
+      </div>
     </MainContainer>
-  )
+  );
 }
