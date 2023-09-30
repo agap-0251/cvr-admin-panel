@@ -1,6 +1,6 @@
 import {z} from "zod"
 
-export const FormSchema = z.object({
+export const StudentSchema = z.object({
     name: z.string().toUpperCase().optional(),
     rollno: z.string().toUpperCase().optional(),
     rank: z.coerce.number().nonnegative().default(0).optional(),
@@ -24,5 +24,22 @@ export const FormSchema = z.object({
     fathermail: z.string().toUpperCase().email().optional(),
     mothermail: z.string().toUpperCase().email().optional(),
   });
+
+  export const MentorSchema = z.object({
+   name : z.string().toUpperCase().optional(),
+   desg : z.string().toUpperCase().optional(),
+   phono : z.coerce.number().max(9999999999).min(1000000000).optional(),
+   mailid : z.string().email().toUpperCase().optional(),
+   sec : z.string().optional(),
+   stdcnt : z.coerce.number().optional()
+  });
+
+  export type STUDENTPARAMS = {
+    id : STUDENTTYPE["rollno"]
+  }
+  export type MENTORPARAMS = {
+    id : MENTORTYPE["mailid"]
+  }
   
-  export type PRELOAD = z.infer<typeof FormSchema>
+  export type STUDENTTYPE = z.infer<typeof StudentSchema>
+  export type MENTORTYPE = z.infer<typeof MentorSchema>

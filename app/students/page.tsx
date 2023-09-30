@@ -1,7 +1,4 @@
-import MainContainer from "@/components/MainContainer";
-import StudentTable from "@/components/StudentTable";
-import { PRELOAD } from "@/lib/types"
-import { Payment, columns } from "./columns"
+import {  columns } from "./columns"
 import { DataTable } from "./data-table"
 
 
@@ -15,18 +12,6 @@ const getStudentDetails = async () => {
   return data.json();
 }
 
-// const StudentBar = ({student}) => {
-//   return (
-//     <div className='flex items-center'>
-//         <p className='mx-4'>{student.name}</p>
-//         <p className='mx-4'>{student.rollno}</p>
-//         <p className='mx-4'>{student.fathername}</p>
-//         <p className='mx-4'>{student.mothername}</p>
-//         <p className='mx-4'>{student.gender}</p>
-//     </div>
-//   )
-// }
-
 const Students = async () => {
 
   const students = await getStudentDetails();
@@ -34,9 +19,6 @@ const Students = async () => {
 
 
   return (
-    // <div className="flex flex-col gap-3 overflow-hidden">
-    //     <StudentTable students={students} />
-    // </div>
     <div className="flex flex-col gap-3 overflow-hidden p-4">
       <DataTable columns={columns} data={students} />
     </div>

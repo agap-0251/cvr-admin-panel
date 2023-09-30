@@ -1,6 +1,6 @@
 'use client'
 
-import { NavbarProvider } from "@/context/navbarContext"
+import { NavbarProvider } from "@/context/NavContext"
 
 const LayoutWrapper = ({children} : any) => {
   return (

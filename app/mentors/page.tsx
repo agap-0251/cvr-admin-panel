@@ -1,5 +1,5 @@
-import MentorTable from "@/components/MentorTable";
-
+import {  columns } from "./columns"
+import { DataTable } from "./data-table"
 
 const getMentorDetails = async () => {
   const data = await fetch('https://mentor-student-umum.onrender.com/mentors',{
@@ -18,8 +18,9 @@ const Mentors = async () => {
 
 
   return (
-    <div className="flex flex-col gap-3 overflow-hidden">
-      <MentorTable mentors={mentors} />
+
+    <div className="flex flex-col gap-3 overflow-hidden p-4">
+      <DataTable columns={columns} data={mentors} />
     </div>
   )
 }

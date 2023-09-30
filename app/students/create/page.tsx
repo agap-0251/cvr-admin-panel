@@ -1,6 +1,5 @@
 import StudentForm from "@/components/StudentForm"
 
-
 const StudentCreate = () => {
 
   return (
@@ -11,3 +10,4 @@ const StudentCreate = () => {
 }
 
 export default StudentCreate
+

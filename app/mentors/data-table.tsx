@@ -24,6 +24,9 @@ import {
 } from "@/components/ui/table"
 
 import { Input } from "@/components/ui/input"
+import Link from "next/link"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -55,25 +58,27 @@ export function DataTable<TData, TValue>({
 
 
   return (
-    <div>
-       <div className="flex items-center py-4">
+    <div className="h-[100vh] overflow-y-auto">
+       <div className="flex items-center py-4 justify-between">
         <Input
           placeholder="Filter emails..."
-          value={(table.getColumn("rollno")?.getFilterValue() as string) ?? ""}
+          value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
-            table.getColumn("rollno")?.setFilterValue(event.target.value)
+            table.getColumn("name")?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
         />
+        <Link href = "/mentors/create" className="bg-white px-4 py-2 rounded-lg text-black hover:bg-slate-200">Create</Link>
       </div>
       <div className="rounded-md border">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
+               
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead key={header.id}>
+                    <TableHead className="p-4" key={header.id}>
                       {header.isPlaceholder
                         ? null
                         : flexRender(
@@ -86,28 +91,40 @@ export function DataTable<TData, TValue>({
                     
                   )
                 })}
-                {/* <TableHead>Controls</TableHead> */}
+                
               </TableRow>
             ))}
           </TableHeader>
           <TableBody>
             {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
-                <TableRow
-                  key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
-                >
-                  {row.getVisibleCells().map((cell) => (
+              table.getRowModel().rows.map((row) => 
+              {
+                // console.log(row.original.rollno
+                
+               <></> 
+               return (
+                  <TableRow
+                    key={row.id}
+                    data-state={row.getIsSelected() && "selected"}
+                  >
                     
-                    <TableCell key={cell.id}>
-                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                    </TableCell>
-                  ))}
-                  <TableCell>
-                    <button>Edit</button>
-                  </TableCell>
-                </TableRow>
-              ))
+                    {row.getVisibleCells().map((cell) => 
+                    {
+                    
+                      return (
+                        
+                        <TableCell className="px-3 py-2" key={cell.id}>
+                          {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                        </TableCell>
+                      )
+                    }
+                    )}
+                    
+                  </TableRow>
+                )
+               
+              }
+              )
             ) : (
               <TableRow>
                 <TableCell colSpan={columns.length} className="h-24 text-center">
