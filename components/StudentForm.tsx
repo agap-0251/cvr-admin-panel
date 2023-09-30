@@ -1,56 +1,9 @@
 "use client";
 
-{
-  /* <FormField
-            control={form.control}
-            name="dob"
-            render={({ field }) => (
-                <FormItem className="flex flex-col">
-                <FormLabel>Date of birth</FormLabel>
-                <Popover>
-                    <PopoverTrigger asChild>
-                    <FormControl>
-                        <Button
-                        variant={"outline"}
-                        className={cn(
-                            "w-[240px] pl-3 text-left font-normal",
-                            !field.value && "text-muted-foreground"
-                        )}
-                        >
-                        {field.value ? (
-                            format(field.value, "PPP")
-                        ) : (
-                            <span>Pick a date</span>
-                        )}
-                        <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                        </Button>
-                    </FormControl>
-                    </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0" align="start">
-                    <Calendar
-                        mode="single"
-                        selected={field.value}
-                        onSelect={field.onChange}
-                        disabled={(date) =>
-                        date > new Date() || date < new Date("1900-01-01")
-                        }
-                        initialFocus
-                    />
-                    </PopoverContent>
-                </Popover>
-                <FormDescription>
-                    Your date of birth is used to calculate your age.
-                </FormDescription>
-                <FormMessage />
-                </FormItem>
-            )} 
-            /> */
-}
-
 import { zodResolver } from "@hookform/resolvers/zod";
-import { FieldValues, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import * as z from "zod";
-import {FormSchema,PRELOAD} from "@/lib/types"
+import {StudentSchema,STUDENTTYPE} from "@/lib/types"
 
 import { Button } from "@/components/ui/button";
 import {
@@ -72,21 +25,15 @@ import {
 import MainContainer from "./MainContainer";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Input } from "./ui/input";
-// import { toast } from "@/components/ui/use-toast"
-// import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover"
-// import {  CalendarIcon } from "lucide-react"
-// import { cn } from "@/lib/utils"
-// import { Calendar } from "@/components/ui/calendar"
-// import { format } from "date-fns"
 
-export default function StudentForm({ isDisabled,preloadValues }: { isDisabled: boolean,preloadValues : PRELOAD}) {
+export default function StudentForm({ isDisabled,preloadValues }: { isDisabled: boolean,preloadValues : STUDENTTYPE}) {
  
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
-    defaultValues : FormSchema.parse(preloadValues)
+  const form = useForm<z.infer<typeof StudentSchema>>({
+    resolver: zodResolver(StudentSchema),
+    defaultValues : StudentSchema.parse(preloadValues)
   });
 
-  async function onSubmit(data: z.infer<typeof FormSchema>) {
+  async function onSubmit(data: z.infer<typeof StudentSchema>) {
     // console.log(data);
     // FormSchema.parse(data)
 

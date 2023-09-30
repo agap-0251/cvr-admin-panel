@@ -1,6 +1,7 @@
 import StudentForm from "@/components/StudentForm"
+import { STUDENTTYPE, STUDENTPARAMS } from "@/lib/types";
 
-const getSpecificStudentDetails = async (id) => {
+const getSpecificStudentDetails = async (id : STUDENTTYPE["rollno"]) => {
   const data = await fetch(`https://mentor-student-umum.onrender.com/students/${id}`,{
     method : 'GET',
     next : {
@@ -10,10 +11,10 @@ const getSpecificStudentDetails = async (id) => {
   return data.json();
 }
 
-const StudentEdit = async ({params}) => {
+const StudentEdit = async ({params} : {params : STUDENTPARAMS}) => {
 
   const details = await getSpecificStudentDetails(params.id)
-  console.log(details)
+  // console.log(details)
 
   return (
     <div>

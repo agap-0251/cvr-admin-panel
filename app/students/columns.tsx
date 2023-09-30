@@ -1,9 +1,8 @@
 "use client"
 
 import { ColumnDef } from "@tanstack/react-table"
-import { MoreHorizontal } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import {PRELOAD} from "@/lib/types"
+import {STUDENTTYPE} from "@/lib/types"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,36 +11,39 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { ArrowUpDown } from "lucide-react"
 import Link from "next/link"
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
-export type Payment = {
-  id: string
-  amount: number
-  status: "pending" | "processing" | "success" | "failed"
-  email: string
+
+const handleDelete = async (id : STUDENTTYPE["rollno"]) => {
+  const res = await fetch(`https://mentor-student-umum.onrender.com/students/${id}`,{
+    method : 'DELETE'
+  })
+  const response = await res.json()
+  // console.log(response)
 }
 
-export const columns: ColumnDef<PRELOAD>[] = [
+export const columns: ColumnDef<STUDENTTYPE>[] = [
   {
     id: "actions",
+    header : "Actions",
     cell: ({ row }) => {
       const payment = row.original
  
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button  className=" px-4 py-2 bg-green-600 hover:bg-green-700 text-white">
+            <Button className=" px-4 py-2 bg-green-600 hover:bg-green-700 text-white">
             ...
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
+          <DropdownMenuContent  align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>          
             <DropdownMenuSeparator />
-            <DropdownMenuItem><Link href = "/students/details">Details</Link></DropdownMenuItem>
-            <DropdownMenuItem>Delete</DropdownMenuItem>
+            <DropdownMenuItem ><Link className="bg-black my-1 text-white hover:bg-gray-700 px-3 py-2 rounded-lg" href = {`/students/details/${payment.rollno}`}>Details</Link></DropdownMenuItem>
+            <DropdownMenuItem ><Link className="bg-black my-1 text-white hover:bg-gray-700 px-3 py-2 rounded-lg" href = {`/students/edit/${payment.rollno}`}>Edit</Link></DropdownMenuItem>
+            <DropdownMenuItem ><Button type="button" className="bg-red-600 hover:bg-red-500" onClick={()=> handleDelete(payment.rollno)}>Delete</Button></DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       )

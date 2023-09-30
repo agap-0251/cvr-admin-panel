@@ -25,7 +25,6 @@ import {
 
 import { Input } from "@/components/ui/input"
 import Link from "next/link"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 
 
 interface DataTableProps<TData, TValue> {
@@ -75,7 +74,7 @@ export function DataTable<TData, TValue>({
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
-                <TableHead>Action</TableHead>
+               
                 {headerGroup.headers.map((header) => {
                   return (
                     <TableHead className="p-4" key={header.id}>
@@ -99,7 +98,9 @@ export function DataTable<TData, TValue>({
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => 
               {
-                // console.log(row.original.rollno)
+                // console.log(row.original.rollno
+                
+               <></> 
                return (
                   <TableRow
                     key={row.id}
@@ -120,6 +121,7 @@ export function DataTable<TData, TValue>({
                     
                   </TableRow>
                 )
+               
               }
               )
             ) : (
