@@ -1,6 +1,5 @@
 import StudentForm from "@/components/StudentForm"
 
-
 const getSpecificStudentDetails = async (id) => {
   const data = await fetch(`https://mentor-student-umum.onrender.com/students/${id}`,{
     method : 'GET',

@@ -1,3 +1,4 @@
+"use client"
 import {
   Table,
   TableBody,
@@ -7,12 +8,18 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { PRELOAD } from "@/lib/types"
 import Link from "next/link"
+import { useEffect, useState } from "react"
+import FilterAndSearch from "./FilterAndSearch"
 
 export default function StudentTable({students} : any) {
+
+  const [stud,setStud] = useState<PRELOAD[] | []>(students)
+
   return (
     <div className="h-[100vh] overflow-scroll">
-
+      <FilterAndSearch students={stud} />
       <Table>
         <TableCaption>A list of your recent invoices.</TableCaption>
         <TableHeader>
@@ -31,7 +38,7 @@ export default function StudentTable({students} : any) {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {students.map((student : any) => (
+          {stud && stud.map((student : any) => (
             <TableRow key={student._id}>
               <TableCell className="font-medium p-4">{student.rollno}</TableCell>
               <TableCell className="p-4">{student.name}</TableCell>

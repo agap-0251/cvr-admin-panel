@@ -1,5 +1,8 @@
 import MainContainer from "@/components/MainContainer";
 import StudentTable from "@/components/StudentTable";
+import { PRELOAD } from "@/lib/types"
+import { Payment, columns } from "./columns"
+import { DataTable } from "./data-table"
 
 
 const getStudentDetails = async () => {
@@ -31,10 +34,15 @@ const Students = async () => {
 
 
   return (
-    <div className="flex flex-col gap-3 overflow-hidden">
-        <StudentTable students={students} />
+    // <div className="flex flex-col gap-3 overflow-hidden">
+    //     <StudentTable students={students} />
+    // </div>
+    <div className="flex flex-col gap-3 overflow-hidden p-4">
+      <DataTable columns={columns} data={students} />
     </div>
   )
 }
+
+// container mx-auto py-10 
 
 export default Students
