@@ -1,6 +1,7 @@
 import './globals.css'
 import { Inter } from 'next/font/google'
 import LayoutWrapper from '@/components/LayoutWrapper'
+import {Analytics} from "@vercel/analytics/react"
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -15,6 +16,7 @@ export default function RootLayout({ children } : any) {
       <body className=" bg-black min-h-screen text-white overflow-hidden">
         <LayoutWrapper>
           {children}
+          <Analytics />
         </LayoutWrapper>
         </body>
     </html>
