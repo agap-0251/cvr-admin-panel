@@ -17,7 +17,7 @@ import Link from "next/link"
 // You can use a Zod schema here if you want.
 
 const handleDelete = async (id : STUDENTTYPE["rollno"]) => {
-  const res = await fetch(`https://mentor-student-umum.onrender.com/students/${id}`,{
+  const res = await fetch(`${process.env.NEXT_PUBLIC_DATA_URL}/students/${id}`,{
     method : 'DELETE'
   })
   const response = await res.json()

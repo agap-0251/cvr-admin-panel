@@ -2,7 +2,7 @@ import {  columns } from "./columns"
 import { DataTable } from "./data-table"
 
 const getMentorDetails = async () => {
-  const data = await fetch('https://mentor-student-umum.onrender.com/mentors',{
+  const data = await fetch(`${process.env.NEXT_PUBLIC_DATA_URL}/mentors`,{
     method : 'GET',
     next : {
       revalidate : 100

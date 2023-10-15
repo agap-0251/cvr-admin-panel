@@ -2,7 +2,7 @@ import MentorForm from "@/components/MentorForm"
 import { MENTORTYPE,MENTORPARAMS } from "@/lib/types";
 
 const getSpecificMentorDetails = async (id : MENTORTYPE["mailid"]) => {
-  const data = await fetch(`https://mentor-student-umum.onrender.com/mentors/${id}`,{
+  const data = await fetch(`${process.env.NEXT_PUBLIC_DATA_URL}/mentors/${id}`,{
     method : 'GET',
     next : {
       revalidate : 100

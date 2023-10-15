@@ -34,7 +34,7 @@ export default function MentorForm({ isDisabled,preloadValues }: { isDisabled: b
     if(!isDisabled) {
       console.log("Inside")
       const res = await fetch(
-        `https://mentor-student-umum.onrender.com/mentors/${data.mailid}`,
+        `${process.env.NEXT_PUBLIC_DATA_URL}/mentors/${data.mailid}`,
         {
           method: "PATCH",
           body: JSON.stringify(data),
@@ -45,12 +45,15 @@ export default function MentorForm({ isDisabled,preloadValues }: { isDisabled: b
         
       );
       const response = await res.json();
+      if(res.ok) {
+        form.reset()
+      }
       // console.log(response);
       return ;
     }
 
     const res = await fetch(
-      `https://mentor-student-umum.onrender.com/mentors/`,
+      `${process.env.NEXT_PUBLIC_DATA_URL}/mentors/`,
       {
         method: "POST",
         body: JSON.stringify(data),

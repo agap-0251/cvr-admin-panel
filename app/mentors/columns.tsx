@@ -23,7 +23,7 @@ export type Payment = {
 }
 
 const handleDelete = async (id : MENTORTYPE["mailid"]) => {
-  const res = await fetch(`https://mentor-student-umum.onrender.com/mentors/${id}`,{
+  const res = await fetch(`${process.env.NEXT_PUBLIC_DATA_URL}/mentors/${id}`,{
     method : 'DELETE'
   })
   const response = await res.json()

@@ -2,7 +2,7 @@ import StudentForm from "@/components/StudentForm"
 import { STUDENTTYPE, STUDENTPARAMS } from "@/lib/types";
 
 const getSpecificStudentDetails = async (id : STUDENTTYPE["rollno"]) => {
-  const data = await fetch(`https://mentor-student-umum.onrender.com/students/${id}`,{
+  const data = await fetch(`${process.env.NEXT_PUBLIC_DATA_URL}/students/${id}`,{
     method : 'GET',
     next : {
       revalidate : 100

@@ -34,6 +34,15 @@ export const StudentSchema = z.object({
    stdcnt : z.coerce.number().optional()
   });
 
+  export const LoginSchema = z.object({
+    email: z.string().email(),
+    password : z.string().min(6,{
+      message : "Password must be atleast 6 characters"
+    })
+  })
+
+  export type LOGINTYPES = z.infer<typeof LoginSchema>
+
   export type STUDENTPARAMS = {
     id : STUDENTTYPE["rollno"]
   }

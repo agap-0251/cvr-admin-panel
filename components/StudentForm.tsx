@@ -40,7 +40,7 @@ export default function StudentForm({ isDisabled,preloadValues }: { isDisabled: 
     if(!isDisabled) {
       console.log("Inside")
       const res = await fetch(
-        `https://mentor-student-umum.onrender.com/students/${data.rollno}`,
+        `${process.env.NEXT_PUBLIC_DATA_URL}/students/${data.rollno}`,
         {
           method: "PATCH",
           body: JSON.stringify(data),
@@ -51,12 +51,15 @@ export default function StudentForm({ isDisabled,preloadValues }: { isDisabled: 
         
       );
       const response = await res.json();
+      if(res.ok) {
+        form.reset()
+      }
       // console.log(response);
       return ;
     }
 
     const res = await fetch(
-      `https://mentor-student-umum.onrender.com/students/`,
+      `${process.env.NEXT_PUBLIC_DATA_URL}/students/`,
       {
         method: "POST",
         body: JSON.stringify(data),
@@ -68,6 +71,8 @@ export default function StudentForm({ isDisabled,preloadValues }: { isDisabled: 
     const response = await res.json();
     // console.log(response);
   }
+
+
 
   return (
     <MainContainer>
